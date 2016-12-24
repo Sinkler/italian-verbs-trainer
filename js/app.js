@@ -393,7 +393,9 @@ var Tenses = React.createClass({
                         <a href="https://facebook.github.io/react/" target="_blank">React</a>
                         <a href="https://babeljs.io/" target="_blank">Babel</a>
                         <a href="http://foundation.zurb.com/" target="_blank">Foundation</a>
+                        <a href="http://zurb.com/playground/foundation-icon-fonts-3" target="_blank">Foundation Icon Fonts</a>
                         <a href="https://github.com/mplatt/fold-to-ascii-js" target="_blank">Ascii Folder</a>
+                        <a href="http://twitter.github.io/twemoji/" target="_blank">Twemoji</a>
                         <a href="https://icons8.com" target="_blank">Icons8</a>
                     </p>
                 }
