@@ -193,15 +193,16 @@ var Form = React.createClass({
             resultTranslate: translate
         };
         this.setState(state, () => {
-            //noinspection JSUnresolvedVariable
             var answer_field = this.inputAnswer;
             answer_field.value = '';
             answer_field.focus();
         });
     },
     showAnswer: function () {
-        //noinspection JSUnresolvedVariable
         var answer = clearInput(this.inputAnswer.value, true);
+        if (!answer.length) {
+            return;
+        }
         var is_right = clearAnswer(this.state.questionAnswer).indexOf(answer) != -1;
         //noinspection JSCheckFunctionSignatures
         var state = {
@@ -247,7 +248,8 @@ var Form = React.createClass({
                                 onChange={this.onFieldChange.bind(this, 'answerIsEmpty')}
                                 placeholder="type answer here"
                                 disabled={this.state.resultText}
-                                ref={input => { this.inputAnswer = input; }}/>
+                                ref={input => { this.inputAnswer = input; }}
+                                lang="it" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"/>
                             <div className="input-group-button">
                                 <button
                                     className={'button' + (this.state.resultText ? ' success' : '')}
@@ -303,21 +305,27 @@ var Counts = React.createClass({
 var Tenses = React.createClass({
     getInitialState: function () {
         return {
-            visible: false
+            tenses: false,
+            links: false
         };
     },
     onCheck: function (e) {
         this.props.update(e.target.value, e.target.checked);
     },
-    onToggle: function (e) {
+    onToggleTenses: function (e) {
         e.preventDefault();
         //noinspection JSCheckFunctionSignatures
-        this.setState({visible: !this.state.visible});
+        this.setState({tenses: !this.state.tenses});
     },
     onChangeVerbs: function (params, e) {
         e.preventDefault();
         window.location.hash = `#${params}`;
         location.reload();
+    },
+    onToggleResources: function (e) {
+        e.preventDefault();
+        //noinspection JSCheckFunctionSignatures
+        this.setState({links: !this.state.links});
     },
     render: function () {
         var data = this.props.tenses;
@@ -342,11 +350,11 @@ var Tenses = React.createClass({
         var hash = window.location.hash;
         //noinspection CheckTagEmptyBody
         return (
-            <div className="toggles">
+            <div className="toggles text-center">
                 <br/>
                 <a
-                    className={'button ' + (this.state.visible ? 'primary' : 'secondary')}
-                    onClick={this.onToggle}>
+                    className={'button ' + (this.state.tenses ? 'primary' : 'secondary')}
+                    onClick={this.onToggleTenses}>
                     Select tenses
                 </a>
                 <a
@@ -364,14 +372,30 @@ var Tenses = React.createClass({
                     onClick={this.onChangeVerbs.bind(this, 'short')}>
                     Short common list
                 </a>
-                <a href="https://github.com/Sinkler/italian-verbs-trainer" className="button">
+                <a
+                    href="https://github.com/Sinkler/italian-verbs-trainer"
+                    className="button secondary">
                     <i className="fi-social-github"></i>
                 </a>
-                {this.state.visible &&
-                    <fieldset className="fieldset">
+                <a
+                    className={'button ' + (this.state.links ? 'primary' : 'secondary')}
+                    onClick={this.onToggleResources}>
+                    <i className="fi-link"></i>
+                </a>
+                {this.state.tenses &&
+                    <fieldset className="fieldset text-left">
                         <legend>Select tenses</legend>
                         {tenses}
                     </fieldset>
+                }
+                {this.state.links &&
+                    <p className="links">
+                        <a href="https://facebook.github.io/react/" target="_blank">React</a>
+                        <a href="https://babeljs.io/" target="_blank">Babel</a>
+                        <a href="http://foundation.zurb.com/" target="_blank">Foundation</a>
+                        <a href="https://github.com/mplatt/fold-to-ascii-js" target="_blank">Ascii Folder</a>
+                        <a href="https://icons8.com" target="_blank">Icons8</a>
+                    </p>
                 }
             </div>
         );
@@ -416,8 +440,10 @@ var App = React.createClass({
         //noinspection CheckTagEmptyBody,HtmlUnknownAttribute
         return (
             <div className="row">
-                <div className="small-12 large-6 large-centered columns">
-                    <h1><span dangerouslySetInnerHTML={{__html: flag}}></span> Italian Verbs Trainer</h1>
+                <div className="small-12 large-7 large-centered columns">
+                    <div className="text-center">
+                        <h1><span dangerouslySetInnerHTML={{__html: flag}}></span> Italian Verbs Trainer</h1>
+                    </div>
                     <Form
                         verbs={data_verbs}
                         translations={data_translations}
