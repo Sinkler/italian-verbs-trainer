@@ -1,0 +1,14 @@
+{
+  "name": "italian-verbs",
+  "version": "1.0.0",
+  "description": "Italian Verbs",
+  "main": "index.html",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Anton Shurashov",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "~4.14.0"
+  }
+}
