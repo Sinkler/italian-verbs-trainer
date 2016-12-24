@@ -196,7 +196,7 @@ var Form = React.createClass({
             //noinspection JSUnresolvedVariable
             var answer_field = this.inputAnswer;
             answer_field.value = '';
-            answer_field.focus()
+            answer_field.focus();
         });
     },
     showAnswer: function () {
@@ -340,6 +340,7 @@ var Tenses = React.createClass({
             )
         });
         var hash = window.location.hash;
+        //noinspection CheckTagEmptyBody
         return (
             <div className="toggles">
                 <br/>
@@ -362,6 +363,9 @@ var Tenses = React.createClass({
                     className={'button ' + (hash == '#short' ? 'primary' : 'secondary')}
                     onClick={this.onChangeVerbs.bind(this, 'short')}>
                     Short common list
+                </a>
+                <a href="https://github.com/Sinkler/italian-verbs-trainer" className="button">
+                    <i className="fi-social-github"></i>
                 </a>
                 {this.state.visible &&
                     <fieldset className="fieldset">
