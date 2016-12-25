@@ -1,4 +1,6 @@
-'use strict';
+import React from 'react';
+import ASCIIFolder from 'fold-to-ascii';
+import Verbs from './verbs.jsx';
 
 String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -392,6 +394,7 @@ var Tenses = React.createClass({
                     <p className="links">
                         <a href="https://facebook.github.io/react/" target="_blank">React</a>
                         <a href="https://babeljs.io/" target="_blank">Babel</a>
+                        <a href="https://webpack.js.org/" target="_blank">Webpack</a>
                         <a href="http://foundation.zurb.com/" target="_blank">Foundation</a>
                         <a href="http://zurb.com/playground/foundation-icon-fonts-3" target="_blank">Foundation Icon Fonts</a>
                         <a href="https://github.com/mplatt/fold-to-ascii-js" target="_blank">Ascii Folder</a>
@@ -408,9 +411,9 @@ var App = React.createClass({
     componentWillMount: function () {
         var hash = window.location.hash;
         if (hash == '#swadesh') {
-            data_verbs = data_verbs.filter(item => item.is_swadesh);
+            Verbs.verbs = Verbs.verbs.filter(item => item.is_swadesh);
         } else if (hash == '#short') {
-            data_verbs = data_verbs_short;
+            Verbs.verbs = Verbs.verbs_short;
         }
     },
     getInitialState: function () {
@@ -447,8 +450,8 @@ var App = React.createClass({
                         <h1><span dangerouslySetInnerHTML={{__html: flag}}></span> Italian Verbs Trainer</h1>
                     </div>
                     <Form
-                        verbs={data_verbs}
-                        translations={data_translations}
+                        verbs={Verbs.verbs}
+                        translations={Verbs.translations}
                         tenses={this.state.tenses}
                         update={this.updateForm}/>
                     <Counts
@@ -462,7 +465,4 @@ var App = React.createClass({
     }
 });
 
-ReactDOM.render(
-    <App/>,
-    document.getElementById('root')
-);
+export default App;

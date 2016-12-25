@@ -1,14 +1,35 @@
 {
-  "name": "italian-verbs",
-  "version": "1.0.0",
-  "description": "Italian Verbs",
+  "name": "italian-verbs-trainer",
+  "version": "0.1.0",
+  "description": "Italian Verbs Trainer",
   "main": "index.html",
   "scripts": {
-    "start": "node server.js"
+    "start": "./node_modules/.bin/webpack-dev-server",
+    "watch": "./node_modules/.bin/webpack -d --watch",
+    "build": "./node_modules/.bin/webpack -p --config ./webpack.prod.config.js"
   },
-  "author": "Anton Shurashov",
-  "license": "MIT",
+  "author": "Anton Shurashov <sinkler@sinkler.ru> (https://github.com/Sinkler)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Sinkler/italian-verbs-trainer/issues"
+  },
+  "homepage": "https://github.com/Sinkler/italian-verbs-trainer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sinkler/italian-verbs-trainer.git"
+  },
   "devDependencies": {
-    "express": "~4.14.0"
+    "babel-loader": "~6.2.10",
+    "babel-core": "~6.21.0",
+    "babel-preset-react": "~6.16.0",
+    "babel-preset-es2015": "~6.18.0",
+    "fold-to-ascii": "~4.0.0",
+    "react": "~15.4.1",
+    "react-dom": "~15.4.1",
+    "webpack": "~1.14.0",
+    "webpack-dev-server": "~1.16.2"
+  },
+  "dependencies": {
+
   }
 }

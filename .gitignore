@@ -1,3 +1,5 @@
 .idea
-py
 node_modules
+*.db
+*.pyc
+todo.txt
