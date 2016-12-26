@@ -19,12 +19,16 @@
     "url": "https://github.com/Sinkler/italian-verbs-trainer.git"
   },
   "devDependencies": {
-    "babel-loader": "~6.2.10",
     "babel-core": "~6.21.0",
+    "babel-eslint": "~7.1.1",
+    "babel-loader": "~6.2.10",
     "babel-plugin-transform-runtime": "~6.15.0",
     "babel-preset-react": "~6.16.0",
     "babel-preset-es2015": "~6.18.0",
     "babel-runtime": "~6.20.0",
+    "eslint": "~3.12.2",
+    "eslint-loader": "~1.6.1",
+    "eslint-plugin-react": "~6.8.0",
     "fold-to-ascii": "~4.0.0",
     "react": "~15.4.1",
     "react-dom": "~15.4.1",

@@ -28,6 +28,11 @@ var config = {
                     FileSystem.realpathSync(__dirname + '/node_modules/fold-to-ascii/lib')
                 ],
                 loader: 'babel'
+            },
+            {
+                test: /\.jsx?/,
+                loader: 'eslint',
+                exclude: /node_modules|verbs.js/
             }
         ]
     }
@@ -43,12 +48,12 @@ if (process.env.production == "true") {
             }
         }),
         function() {
-            this.plugin("done", function(statsData) {
+            this.plugin('done', function(statsData) {
                 var stats = statsData.toJson();
                 if (!stats.errors.length) {
-                    var htmlFileName = "index.html";
+                    var htmlFileName = 'index.html';
                     //noinspection JSUnresolvedFunction,JSUnresolvedVariable
-                    var html = FileSystem.readFileSync(Path.join(__dirname, htmlFileName), "utf8");
+                    var html = FileSystem.readFileSync(Path.join(__dirname, htmlFileName), 'utf8');
                     var htmlOutput = html.replace(/(["']).js\?([\w\d]+)/i, '$1.js?' + stats.hash);
                     //noinspection JSUnresolvedFunction,JSUnresolvedVariable
                     FileSystem.writeFileSync(Path.join(__dirname, htmlFileName), htmlOutput);

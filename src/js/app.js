@@ -440,8 +440,13 @@ var App = React.createClass({
         });
     },
     render: function () {
-        //noinspection JSUnresolvedVariable
-        var flag = twemoji.parse('&#x1f1ee;&#x1f1f9;', {size: 32});
+        var flag;
+        try {
+            /* global twemoji */
+            flag = twemoji.parse('&#x1f1ee;&#x1f1f9;', {size: 32});
+        } catch (e) {
+            flag = '';
+        }
         //noinspection CheckTagEmptyBody,HtmlUnknownAttribute
         return (
             <div className="row">
