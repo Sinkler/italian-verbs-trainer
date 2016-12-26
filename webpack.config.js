@@ -9,7 +9,7 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.jsx']
     },
-    entry: Path.resolve(APP_DIR, 'index.jsx'),
+    entry: ['babel-polyfill', Path.resolve(APP_DIR, 'index.jsx')],
     output: {
         path: BUILD_DIR,
         filename: 'dev.js',
