@@ -28,7 +28,7 @@ csv_keys = [
 
 with open(os.path.join(base_dir, 'swadesh.txt')) as f:
     swadesh = f.readlines()
-    swadesh = map(lambda x: x.split(' ')[0], swadesh)
+    swadesh = map(lambda x: x.split(' ')[0].strip(), swadesh)
 
 with open(os.path.join(base_dir, 'verbs_ru.csv')) as f:
     data = []
@@ -66,6 +66,6 @@ output += u'var translations = [' \
 
 output += u'export default {verbs: verbs, verbs_short: verbs_short, translations: translations};'
 
-with open(os.path.join(base_dir, '..', 'src', 'js', 'verbs.jsx'), 'w') as f:
+with open(os.path.join(base_dir, '..', 'src', 'js', 'verbs.js'), 'w') as f:
     f.write(output.encode('utf-8'))
     f.close()
