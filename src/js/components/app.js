@@ -6,28 +6,32 @@ import Form from '../containers/form'
 import Counts from '../containers/counts'
 import Footer from '../containers/footer'
 
-var App = React.createClass({
-    componentWillMount: function () {
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            tenses: TensesList,
+            counts: [0, 0]
+        };
+    }
+    //noinspection JSMethodCanBeStatic
+    componentWillMount() {
         var hash = window.location.hash;
         if (hash == '#swadesh') {
             Verbs.verbs = Verbs.verbs.filter(item => item.is_swadesh);
         } else if (hash == '#short') {
             Verbs.verbs = Verbs.verbs_short;
         }
-    },
-    getInitialState: function () {
-        return {
-            tenses: TensesList,
-            counts: [0, 0]
-        };
-    },
-    updateForm: function (is_right) {
+    }
+    updateForm(is_right) {
         var counts = this.state.counts;
-        counts[is_right ? 0 : 1]++;
         //noinspection JSCheckFunctionSignatures
-        this.setState({counts: counts});
-    },
-    updateTenses: function (id, is_checked) {
+        this.setState({counts: [
+            is_right ? counts[0] + 1 : counts[0],
+            is_right ? counts[1] : counts[1] + 1
+        ]});
+    }
+    updateTenses(id, is_checked) {
         //noinspection JSCheckFunctionSignatures
         this.setState({
             tenses: this.state.tenses.map(item => {
@@ -37,8 +41,8 @@ var App = React.createClass({
                 return item;
             })
         });
-    },
-    render: function () {
+    }
+    render() {
         var flag;
         try {
             /* global twemoji */
@@ -58,16 +62,16 @@ var App = React.createClass({
                         verbs={Verbs.verbs}
                         translations={Verbs.translations}
                         tenses={this.state.tenses}
-                        update={this.updateForm}/>
+                        update={this.updateForm.bind(this)}/>
                     <Counts
                         counts={this.state.counts}/>
                     <Footer
                         tenses={this.state.tenses}
-                        update={this.updateTenses}/>
+                        update={this.updateTenses.bind(this)}/>
                 </div>
             </div>
         );
     }
-});
+}
 
 export default App;

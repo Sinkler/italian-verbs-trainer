@@ -1,7 +1,7 @@
 import React from 'react';
 
-var Counts = React.createClass({
-    render: function () {
+class Counts extends React.PureComponent {
+    render() {
         return (
             <div className="row">
                 <div className="small-6 columns">
@@ -15,6 +15,6 @@ var Counts = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default Counts;

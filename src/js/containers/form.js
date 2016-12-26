@@ -1,9 +1,10 @@
 import React from 'react';
 import Utils from '../utils';
 
-var Form = React.createClass({
-    getInitialState: function () {
-        return {
+class Form extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
             is_valid: true,
             questionPronoun: '',
             questionVerb: '',
@@ -15,26 +16,26 @@ var Form = React.createClass({
             resultAnswer: '',
             resultTranslate: []
         };
-    },
-    componentDidMount: function () {
+    }
+    componentDidMount() {
         this.updateQuestion();
-    },
-    componentWillReceiveProps: function (nextProps) {
+    }
+    componentWillReceiveProps(nextProps) {
         if (this.props.tenses != nextProps.tenses) {
             this.updateQuestion(false);
         }
-    },
-    onFieldChange: function (fieldName, e) {
+    }
+    onFieldChange(fieldName, e) {
         if (this.state[fieldName] != !e.target.value.trim().length) {
             //noinspection JSCheckFunctionSignatures
             this.setState({[fieldName]: !e.target.value.trim().length});
         }
-    },
-    onSubmitHandler: function (e) {
+    }
+    onSubmitHandler(e) {
         e.preventDefault();
         !this.state.resultText ? this.showAnswer() : this.updateQuestion();
-    },
-    updateQuestion: function (autofocus = true) {
+    }
+    updateQuestion(autofocus = true) {
         var active_tenses = this.props.tenses.filter(item => item.active);
         if (!active_tenses.length) {
             //noinspection JSCheckFunctionSignatures
@@ -88,8 +89,8 @@ var Form = React.createClass({
             answer_field.value = '';
             answer_field.focus();
         });
-    },
-    showAnswer: function () {
+    }
+    showAnswer() {
         var answer = Utils.clearInput(this.inputAnswer.value, true, this.state.questionPronoun);
         if (!answer.length) {
             return;
@@ -104,8 +105,8 @@ var Form = React.createClass({
         };
         this.setState(state, () => this.button.focus());
         this.props.update(is_right);
-    },
-    render: function () {
+    }
+    render() {
         var translations = this.state.resultTranslate.map(item => {
             //noinspection HtmlUnknownAttribute
             return (
@@ -118,7 +119,7 @@ var Form = React.createClass({
         return (
             <div>
                 {this.state.is_valid &&
-                    <form className="form" onSubmit={this.onSubmitHandler}>
+                    <form className="form" onSubmit={this.onSubmitHandler.bind(this)}>
                         <div className="callout">
                             <p title="Pronoun">
                                 <i className="fi-torsos-male-female"></i>
@@ -176,6 +177,6 @@ var Form = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default Form;

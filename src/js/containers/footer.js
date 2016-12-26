@@ -1,26 +1,28 @@
 import React from 'react';
 
-var Footer = React.createClass({
-    getInitialState: function () {
-        return {
+class Footer extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
             tenses: false,
             lists: false,
             links: false
         };
-    },
-    onCheck: function (e) {
+    }
+    onCheck(e) {
         this.props.update(e.target.value, e.target.checked);
-    },
-    onToggle: function (v, e) {
+    }
+    onToggle(v, e) {
         e.preventDefault();
         this.setState({[v]: !this.state[v]});
-    },
-    onChangeVerbs: function (params, e) {
+    }
+    //noinspection JSMethodCanBeStatic
+    onChangeVerbs(params, e) {
         e.preventDefault();
         window.location.hash = `#${params}`;
         location.reload();
-    },
-    render: function () {
+    }
+    render() {
         var data = this.props.tenses;
         if (!data) {
             return null;
@@ -34,7 +36,7 @@ var Footer = React.createClass({
                             type="checkbox"
                             value={item.id}
                             checked={item.active}
-                            onChange={this.onCheck}/>
+                            onChange={this.onCheck.bind(this)}/>
                         {item.name}
                     </label>
                 </div>
@@ -118,6 +120,6 @@ var Footer = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default Footer;
