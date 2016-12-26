@@ -84,12 +84,14 @@ var Form = React.createClass({
         });
     },
     showAnswer: function () {
-        var answer = Utils.clearInput(this.inputAnswer.value, true);
+        var answer = Utils.clearInput(this.inputAnswer.value, true, this.state.questionPronoun);
         if (!answer.length) {
             return;
         }
-        var is_right = Utils.clearAnswer(this.state.questionAnswer).indexOf(answer) != -1;
-        //noinspection JSCheckFunctionSignatures
+        var cleared = Utils.clearAnswer(this.state.questionAnswer);
+        var first = cleared.indexOf(answer) != -1;
+        var second = cleared.indexOf(answer.substr(0, answer.length - 1)) != -1;
+        var is_right = first || second;
         var state = {
             result: is_right,
             resultText: is_right ? 'Yes!' : 'No!'
