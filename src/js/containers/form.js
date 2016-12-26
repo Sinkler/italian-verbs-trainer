@@ -21,7 +21,7 @@ var Form = React.createClass({
     },
     componentWillReceiveProps: function (nextProps) {
         if (this.props.tenses != nextProps.tenses) {
-            this.updateQuestion();
+            this.updateQuestion(false);
         }
     },
     onFieldChange: function (fieldName, e) {
@@ -34,7 +34,7 @@ var Form = React.createClass({
         e.preventDefault();
         !this.state.resultText ? this.showAnswer() : this.updateQuestion();
     },
-    updateQuestion: function () {
+    updateQuestion: function (autofocus = true) {
         var active_tenses = this.props.tenses.filter(item => item.active);
         if (!active_tenses.length) {
             //noinspection JSCheckFunctionSignatures
@@ -78,6 +78,9 @@ var Form = React.createClass({
             resultTranslate: translate
         };
         this.setState(state, () => {
+            if (!autofocus) {
+                return;
+            }
             var answer_field = this.inputAnswer;
             answer_field.value = '';
             answer_field.focus();
