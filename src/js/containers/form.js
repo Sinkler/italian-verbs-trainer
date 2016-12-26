@@ -51,10 +51,13 @@ var Form = React.createClass({
         );
         //noinspection JSUnresolvedVariable
         var verb_obj = this.props.verbs[random_verb];
-        var infinitive = Utils.clearInput(verb_obj.verb);
+        if (tense.prepend) {
+            verb_obj[tense.slug] = tense.prepend.concat(verb_obj[tense.slug])
+        }
         var answer = verb_obj[tense.slug][random_pronoun];
         var translate = [];
-        var pronoun = Utils.capitalizeFirstLetter(this.props.pronouns[random_pronoun]);
+        var pronoun = this.props.pronouns[random_pronoun];
+        var infinitive = Utils.clearInput(verb_obj.verb);
         //noinspection JSUnresolvedVariable
         this.props.translations.forEach(function (item) {
             var t = item.data[infinitive];

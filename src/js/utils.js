@@ -13,8 +13,13 @@ function getRandomInt(min, max) {
 
 function clearInput(input, fold = false, replace_pronoun = '') {
     var result = input.trim().toLowerCase().replace(/\s\s+/g, ' ');
-    if (replace_pronoun && result.startsWith(replace_pronoun.toLowerCase())) {
-        result = result.replace(replace_pronoun.toLowerCase(), '').trim();
+    if (replace_pronoun) {
+        replace_pronoun.toLowerCase().split('/').forEach(item => {
+            var find = item + ' ';
+            if (result.startsWith(find)) {
+                result = result.replace(find, '');
+            }
+        });
     }
     if (fold) {
         result = ASCIIFolder.fold(result);

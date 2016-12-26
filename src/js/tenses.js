@@ -86,7 +86,8 @@ export default [
     {
         slug: 'imperative',
         name: 'Imperativo',
-        pronouns: [1, 5],
+        pronouns: [1, 6],
+        prepend: [''],
         active: false,
         id: 15
     }

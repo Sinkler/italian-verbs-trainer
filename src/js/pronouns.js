@@ -1,1 +1,1 @@
-export default ['io', 'tu', 'lui/lei', 'noi', 'voi', 'loro'];
+export default ['Io', 'Tu', 'Lui/Lei', 'Noi', 'Voi', 'Loro'];
