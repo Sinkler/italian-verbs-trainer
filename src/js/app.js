@@ -1,6 +1,6 @@
 import React from 'react';
 import ASCIIFolder from 'fold-to-ascii';
-import Verbs from './verbs.jsx';
+import Verbs from './verbs';
 
 String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
