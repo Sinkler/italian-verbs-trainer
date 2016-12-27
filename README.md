@@ -1,6 +1,10 @@
 # Italian Verbs Trainer
 
-[go to website](https://sinkler.github.io/italian-verbs-trainer/)
+[Go to website](https://sinkler.github.io/italian-verbs-trainer/)
+
+[Discuss on Duolingo English Forum](https://sinkler.github.io/italian-verbs-trainer/)
+
+[Discuss on Duolingo Russian Forum](https://sinkler.github.io/italian-verbs-trainer/)
 
 # Develop
 
