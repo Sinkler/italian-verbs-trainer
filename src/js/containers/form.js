@@ -52,10 +52,11 @@ class Form extends React.PureComponent {
         );
         //noinspection JSUnresolvedVariable
         var verb_obj = this.props.verbs[random_verb];
+        var answers = verb_obj[tense.slug];
         if (tense.prepend) {
-            verb_obj[tense.slug] = tense.prepend.concat(verb_obj[tense.slug])
+            answers = tense.prepend.concat(answers)
         }
-        var answer = verb_obj[tense.slug][random_pronoun];
+        var answer = answers[random_pronoun];
         var translate = [];
         var pronoun = this.props.pronouns[random_pronoun];
         var infinitive = Utils.clearInput(verb_obj.verb);
