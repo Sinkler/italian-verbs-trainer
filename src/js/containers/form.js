@@ -27,7 +27,6 @@ class Form extends React.PureComponent {
     }
     onFieldChange(fieldName, e) {
         if (this.state[fieldName] != !e.target.value.trim().length) {
-            //noinspection JSCheckFunctionSignatures
             this.setState({[fieldName]: !e.target.value.trim().length});
         }
     }
@@ -38,29 +37,28 @@ class Form extends React.PureComponent {
     updateQuestion(autofocus = true) {
         var active_tenses = this.props.tenses.filter(item => item.active);
         if (!active_tenses.length) {
-            //noinspection JSCheckFunctionSignatures
             this.setState({is_valid: false});
             return;
         }
-        //noinspection JSUnresolvedVariable
         var random_verb = Utils.getRandomInt(0, this.props.verbs.length);
         var random_tense = Utils.getRandomInt(0, active_tenses.length);
         var tense = active_tenses[random_tense];
-        var random_pronoun = Utils.getRandomInt(
-            tense.pronouns ? tense.pronouns[0] : 0,
-            tense.pronouns ? tense.pronouns[1] : this.props.pronouns.length
-        );
-        //noinspection JSUnresolvedVariable
         var verb_obj = this.props.verbs[random_verb];
         var answers = verb_obj[tense.slug];
         if (tense.prepend) {
             answers = tense.prepend.concat(answers)
         }
+        var random_pronoun = Utils.getRandomInt(
+            tense.pronouns ? tense.pronouns[0] : 0,
+            tense.pronouns ? tense.pronouns[1] : this.props.pronouns.length
+        );
+        if (verb_obj.verb in this.props.exceptions) {
+            random_pronoun = this.props.exceptions[verb_obj.verb](random_pronoun);
+        }
         var answer = answers[random_pronoun];
         var translate = [];
         var pronoun = this.props.pronouns[random_pronoun];
         var infinitive = Utils.clearInput(verb_obj.verb);
-        //noinspection JSUnresolvedVariable
         this.props.translations.forEach(function (item) {
             var t = item.data[infinitive];
             if (t) {

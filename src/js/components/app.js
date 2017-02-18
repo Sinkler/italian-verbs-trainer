@@ -1,5 +1,5 @@
 import React from 'react';
-import PronounsList from '../pronouns';
+import Pronouns from '../pronouns';
 import TensesList from '../tenses';
 import Verbs from '../verbs';
 import Form from '../containers/form'
@@ -58,7 +58,8 @@ class App extends React.Component {
                         <h1><span dangerouslySetInnerHTML={{__html: flag}}></span> Italian Verbs Trainer</h1>
                     </div>
                     <Form
-                        pronouns={PronounsList}
+                        pronouns={Pronouns.list}
+                        exceptions={Pronouns.exceptions}
                         verbs={Verbs.verbs}
                         translations={Verbs.translations}
                         tenses={this.state.tenses}
