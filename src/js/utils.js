@@ -29,6 +29,17 @@ function clearInput(input, fold = false, replace_pronoun = '') {
 
 function clearAnswer(answer) {
     var answers = answer.split(';').map(item => item.trim());
+    if (!answers.length) {
+        return answers;
+    }
+    if (answers[0].indexOf(' ') != -1 && answers.length > 1 && answers[1].indexOf(' ') == -1) {
+        var prepend = answers[0].split(' ')[0];
+        answers.forEach((item, key) => {
+            if (item.indexOf(' ') == -1) {
+                answers[key] = prepend + ' ' + item;
+            }
+        });
+    }
     if (answers && answers[0].indexOf(' ') != -1) {
         var new_answers = [];
         answers.forEach(item => new_answers.push(item.substr(0, item.length - 1)));
