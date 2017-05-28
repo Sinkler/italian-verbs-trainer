@@ -49,20 +49,14 @@ with open(os.path.join(base_dir, 'verbs_duolingo.csv')) as f:
         data.append(d)
 output += u'var verbs = {};'.format(json.dumps(data))
 
-with open(os.path.join(base_dir, 'translations_en.csv')) as f:
-    translations_en = {}
-    for row in csv.reader(f):
-        translations_en[row[0]] = row[1]
-
-with open(os.path.join(base_dir, 'translations_ru.csv')) as f:
-    translations_ru = {}
-    for row in csv.reader(f):
-        translations_ru[row[0]] = row[1]
-
-output += u'var translations = [' \
-          u'{"lang": "en", "data": %s}, ' \
-          u'{"lang": "ru", "data": %s}' \
-          u'];' % (json.dumps(translations_en), json.dumps(translations_ru))
+translations = []
+for lang in ('en', 'ru', 'cz'):
+    with open(os.path.join(base_dir, 'translations_{}.csv'.format(lang))) as f:
+        translations_local = {}
+        for row in csv.reader(f):
+            translations_local[row[0]] = row[1]
+    translations.append(u'{"lang": "%s", "data": %s}' % (lang, json.dumps(translations_local)))
+output += u'var translations = [{}];'.format(', '.join(translations))
 
 output += u'export default {verbs: verbs, verbs_short: verbs_short, translations: translations};'
 
