@@ -8,6 +8,5 @@
 
 # Develop
 
-`npm install`  
-`npm start`  
-`npm run build`
+`docker-compose up`  
+`docker-compose run --rm node build`

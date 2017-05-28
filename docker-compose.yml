@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  node:
+    container_name: italian-verbs-trainer
+    image: node:6.10.1
+    entrypoint: /app/docker-entrypoint.sh
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/app/

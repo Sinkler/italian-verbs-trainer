@@ -35,6 +35,9 @@ var config = {
                 exclude: /node_modules|verbs.js/
             }
         ]
+    },
+    devServer: {
+        host: '0.0.0.0'
     }
 };
 
